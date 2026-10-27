@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<!-- saved from url=(0072)file:///C:/Users/Moses%20samah/OneDrive/Desktop/Student%20Portfolio.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Portfolio</title>
+<style>
+:root {
+    --p: #4f46e5;
+    --pd: #312e81;
+    --soft: #eef2ff;
+    --line: #e5e7eb;
+    --muted: #6b7280;
+    --text: #1f2937;
+}
+* { box-sizing: border-box; }
+html {
+    background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
+    background-attachment: fixed;
+}
+body {
+    font-family: "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+    color: var(--text);
+    line-height: 1.7;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px 16px 40px;
+}
+
+/* ---------- Top bar ---------- */
+.toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-bottom: 14px;
+}
+.btn {
+    font: inherit;
+    font-weight: 600;
+    color: #fff;
+    background: var(--p);
+    border: 0;
+    border-radius: 8px;
+    padding: 8px 18px;
+    cursor: pointer;
+    transition: background .2s;
+}
+.btn:hover { background: var(--pd); }
+.btn.alt { background: #fff; color: var(--pd); border: 1px solid var(--p); }
+.btn.alt:hover { background: var(--soft); }
+.hint { margin: 0 0 14px; color: var(--muted); font-size: .95rem; text-align: right; }
+
+/* ---------- Layout ---------- */
+.layout {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 20px;
+    align-items: start;
+}
+.layout > * { min-width: 0; }
+
+/* ---------- Profile card (left) ---------- */
+.profile {
+    background: linear-gradient(160deg, var(--pd), var(--p));
+    color: #fff;
+    border-radius: 16px;
+    padding: 28px 22px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(49, 46, 129, .25);
+}
+#photo {
+    width: 160px;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, .3);
+}
+.profile h1 { margin: 14px 0 0; font-size: 1.6rem; line-height: 1.25; }
+.role { margin: 4px 0 16px; color: #c7d2fe; }
+.upload-row { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; }
+.upload-row input { display: none; }
+.profile .btn { background: #fff; color: var(--pd); padding: 6px 14px; font-size: .9rem; }
+.profile .btn:hover { background: var(--soft); }
+#msg { min-height: 1.4em; margin: 8px 0 0; font-size: .85rem; color: #c7d2fe; }
+.quick { text-align: left; margin-top: 18px; border-top: 1px solid rgba(255, 255, 255, .25); padding-top: 14px; font-size: .95rem; }
+.quick p { margin: 0 0 8px; word-break: break-word; }
+.quick b { display: block; font-size: .75rem; letter-spacing: .06em; text-transform: uppercase; color: #c7d2fe; }
+
+/* ---------- Content card (right) ---------- */
+.content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 8px 28px 28px;
+    box-shadow: 0 10px 30px rgba(49, 46, 129, .12);
+}
+h2 {
+    font-size: 1.3rem;
+    color: var(--p);
+    border-left: 5px solid var(--p);
+    padding-left: 12px;
+    margin: 28px 0 12px;
+}
+.info { display: grid; grid-template-columns: 180px 1fr; margin: 0; }
+.info dt, .info dd { margin: 0; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+.info dt { font-weight: 600; color: var(--pd); background: var(--soft); }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+th { background: var(--p); color: #fff; }
+tbody tr:nth-child(even) { background: var(--soft); }
+footer { text-align: center; color: var(--muted); font-size: .9rem; margin-top: 20px; }
+
+/* ---------- Editing ---------- */
+.ph { background: #fef3c7; color: #78350f; border-radius: 4px; padding: 0 4px; }
+.editing .ed { outline: 2px dashed var(--p); outline-offset: 2px; border-radius: 4px; cursor: text; }
+.editing .ed:focus { outline-style: solid; background: #fffbe6; color: var(--text); }
+.profile .editing .ed, .editing .profile .ed { outline-color: #fff; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 800px) {
+    .layout { grid-template-columns: 1fr; }
+    .info { grid-template-columns: 1fr; }
+    .info dt { border-bottom: 0; }
+    .content { padding: 4px 18px 24px; }
+    .toolbar { justify-content: center; }
+    .hint { text-align: center; }
+}
+
+/* ---------- Printing ---------- */
+@media print {
+    html { background: #fff; }
+    .toolbar, .hint, .upload-row, #msg { display: none; }
+    .profile, .content { box-shadow: none; }
+    .profile { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    th { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+    <button type="button" class="btn" id="edit-btn">Edit information</button>
+    <button type="button" class="btn alt" onclick="window.print()">Print</button>
+    <button type="button" class="btn alt" id="reset-btn">Reset all</button>
+</div>
+<p class="hint" id="hint">Click "Edit information", then click any text to change it. Your changes are saved in this browser.</p>
+
+<div class="layout">
+
+    <!-- ===== Left: profile card ===== -->
+    <aside class="profile">
+        <img id="photo" src="data:image/svg+xml;utf8,&lt;svg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 200 200&#39;&gt;&lt;rect width=&#39;200&#39; height=&#39;200&#39; fill=&#39;%23c7d2fe&#39;/&gt;&lt;circle cx=&#39;100&#39; cy=&#39;78&#39; r=&#39;38&#39; fill=&#39;%234f46e5&#39;/&gt;&lt;path d=&#39;M28 200c0-46 32-74 72-74s72 28 72 74z&#39; fill=&#39;%234f46e5&#39;/&gt;&lt;/svg&gt;" alt="Student profile photo">
+        <h1><span class="ed" data-k="fullName">Moses Samah</span></h1>
+        <p class="role"><span class="ed" data-k="role">Student</span></p>
+
+        <div class="upload-row">
+            <input type="file" id="photo-input" accept="image/*">
+            <label for="photo-input" class="btn">Upload photo</label>
+            <button type="button" class="btn" id="photo-remove" hidden="">Remove</button>
+        </div>
+        <p id="msg" role="status"></p>
+
+        <div class="quick">
+            <p><b>Email</b><span class="ed" data-k="email">mosesbeyansamah@gmail.com</span></p>
+            <p><b>Phone</b><span class="ed" data-k="phone">+63 955 732 9472</span></p>
+            <p><b>Nationality</b><span class="ed" data-k="nationality">Liberia</span></p>
+        </div>
+    </aside>
+
+    <!-- ===== Right: information ===== -->
+    <main class="content">
+
+        <h2>Personal information</h2>
+        <dl class="info">
+            <dt>Full name</dt>
+            <dd><span class="ed" data-k="fullName">Moses Samah</span></dd>
+            <dt>Family name</dt>
+            <dd><span class="ed" data-k="familyName">Samah</span></dd>
+            <dt>Gender</dt>
+            <dd><span class="ed" data-k="gender">Male</span></dd>
+            <dt>Nationality</dt>
+            <dd><span class="ed" data-k="nationality">Liberia</span></dd>
+        </dl>
+
+        <h2>Education</h2>
+        <dl class="info">
+            <dt>Education status</dt>
+            <dd><span class="ed" data-k="eduStatus">Student</span></dd>
+            <dt>School / University</dt>
+            <dd><span class="ed" data-k="school">University of the cordilliras</span></dd>
+            <dt>Course / Program</dt>
+            <dd><span class="ed" data-k="course">Information Technology</span></dd>
+            <dt>Year level</dt>
+            <dd><span class="ed" data-k="level">1st year</span></dd>
+            <dt>Expected graduation</dt>
+            <dd><span class="ed" data-k="grad">2028</span></dd>
+            <dt>Previous school</dt>
+            <dd><span class="ed" data-k="prevSchool">Dellenna west 'O brein</span></dd>
+        </dl>
+
+        <h2>Family information</h2>
+        <div class="table-wrap">
+            <table>
+                <thead>
+                    <tr><th>Relationship</th><th>Full name</th><th>Occupation</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Father</td>
+                        <td><span class="ed" data-k="fatherName">Okasa B. samah</span></td>
+                        <td><span class="ed" data-k="fatherJob">Business</span></td>
+                    </tr>
+                    <tr>
+                        <td>Mother</td>
+                        <td><span class="ed" data-k="motherName">Manda Samah</span></td>
+                        <td><span class="ed" data-k="motherJob">Business</span></td>
+                    </tr>
+                    <tr>
+                        <td>Brother / Sister</td>
+                        <td><span class="ed" data-k="sibName">Grace Samah</span></td>
+                        <td><span class="ed" data-k="sibJob">Business</span></td>
+                    </tr>
+                    <tr>
+                        <td>Guardian</td>
+                        <td><span class="ed" data-k="guardName">Wolobah samah</span></td>
+                        <td><span class="ed" data-k="guardJob">Business</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <h2>Address</h2>
+        <dl class="info">
+            <dt>Street / House no.</dt>
+            <dd><span class="ed" data-k="street">Bakakeng North, Cecilia Drive, AD2</span></dd>
+            <dt>City / Town</dt>
+            <dd><span class="ed" data-k="city">Baguio City</span></dd>
+            <dt>State / Province</dt>
+            <dd><span class="ed" data-k="province">Tarlac</span></dd>
+            <dt>Country</dt>
+            <dd><span class="ed" data-k="country">Philippine</span></dd>
+            <dt>Postal code</dt>
+            <dd><span class="ed" data-k="postal">2600</span></dd>
+        </dl>
+
+        <h2>Contact information</h2>
+        <dl class="info">
+            <dt>Email</dt>
+            <dd><span class="ed" data-k="email">mosesbeyansamah@gmail.com</span></dd>
+            <dt>Phone</dt>
+            <dd><span class="ed" data-k="phone">+63 955 732 9472</span></dd>
+            <dt>Emergency contact</dt>
+            <dd><span class="ed" data-k="emergency">Gayflor James</span></dd>
+        </dl>
+
+    </main>
+</div>
+
+<footer><p>© <span id="year">2026</span> Student Portfolio</p></footer>
+
+<script>
+// ---------- Saved text ----------
+var STORE = "studentPortfolioData";
+var data = {};
+try { data = JSON.parse(localStorage.getItem(STORE) || "{}"); } catch (e) { data = {}; }
+
+function save() {
+    try { localStorage.setItem(STORE, JSON.stringify(data)); } catch (e) {}
+}
+
+var fields = document.querySelectorAll(".ed");
+fields.forEach(function (el) {
+    var key = el.dataset.k;
+    if (data[key] !== undefined) {
+        el.textContent = data[key];
+        el.classList.remove("ph");
+    }
+    el.addEventListener("input", function () {
+        var text = el.textContent.trim();
+        data[key] = text;
+        save();
+        // keep every copy of the same field (e.g. full name) in step
+        document.querySelectorAll('.ed[data-k="' + key + '"]').forEach(function (other) {
+            other.classList.remove("ph");
+            if (other !== el) { other.textContent = text; }
+        });
+    });
+    el.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") { e.preventDefault(); el.blur(); }
+    });
+});
+
+// ---------- Edit mode ----------
+var editBtn = document.getElementById("edit-btn");
+var hint = document.getElementById("hint");
+var editing = false;
+editBtn.addEventListener("click", function () {
+    editing = !editing;
+    document.body.classList.toggle("editing", editing);
+    fields.forEach(function (el) { el.contentEditable = editing ? "true" : "false"; });
+    editBtn.textContent = editing ? "Done editing" : "Edit information";
+    hint.textContent = editing
+        ? "Editing is ON. Click any dashed text to change it. Press Enter when finished with a line."
+        : 'Click "Edit information", then click any text to change it. Your changes are saved in this browser.';
+});
+
+// ---------- Reset ----------
+document.getElementById("reset-btn").addEventListener("click", function () {
+    if (confirm("Clear all saved information and the photo?")) {
+        try { localStorage.removeItem(STORE); localStorage.removeItem("studentPortfolioPhoto"); } catch (e) {}
+        location.reload();
+    }
+});
+
+// ---------- Profile photo ----------
+var PHOTO_KEY = "studentPortfolioPhoto";
+var DEFAULT_PHOTO = "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'>" +
+    "<rect width='200' height='200' fill='%23c7d2fe'/><circle cx='100' cy='78' r='38' fill='%234f46e5'/>" +
+    "<path d='M28 200c0-46 32-74 72-74s72 28 72 74z' fill='%234f46e5'/></svg>";
+var photo = document.getElementById("photo");
+var input = document.getElementById("photo-input");
+var removeBtn = document.getElementById("photo-remove");
+var msg = document.getElementById("msg");
+
+function savedPhoto() {
+    try { return localStorage.getItem(PHOTO_KEY); } catch (e) { return null; }
+}
+function showPhoto() {
+    var s = savedPhoto();
+    photo.src = s || DEFAULT_PHOTO;
+    removeBtn.hidden = !s;
+}
+
+input.addEventListener("change", function () {
+    var file = input.files[0];
+    if (!file) { return; }
+    if (!file.type.startsWith("image/")) { msg.textContent = "Please choose an image file."; return; }
+    var reader = new FileReader();
+    reader.onload = function () {
+        var img = new Image();
+        img.onload = function () {
+            var size = Math.min(img.width, img.height);
+            var canvas = document.createElement("canvas");
+            canvas.width = 400;
+            canvas.height = 400;
+            canvas.getContext("2d").drawImage(img, (img.width - size) / 2, (img.height - size) / 2, size, size, 0, 0, 400, 400);
+            var small = canvas.toDataURL("image/jpeg", 0.85);
+            try {
+                localStorage.setItem(PHOTO_KEY, small);
+                msg.textContent = "Photo saved.";
+            } catch (e) {
+                msg.textContent = "Photo shown, but could not be saved.";
+            }
+            photo.src = small;
+            removeBtn.hidden = false;
+        };
+        img.src = reader.result;
+    };
+    reader.readAsDataURL(file);
+});
+
+removeBtn.addEventListener("click", function () {
+    try { localStorage.removeItem(PHOTO_KEY); } catch (e) {}
+    input.value = "";
+    showPhoto();
+    msg.textContent = "Photo removed.";
+});
+
+document.getElementById("year").textContent = new Date().getFullYear();
+showPhoto();
+</script>
+
+
+</body></html>
